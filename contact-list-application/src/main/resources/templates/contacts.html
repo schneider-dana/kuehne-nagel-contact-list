@@ -10,6 +10,7 @@
     <a href="/">
         <button>Home</button>
     </a>
+
     <table>
         <thead>
         <tr>
@@ -18,15 +19,22 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${contacts.empty}">
-            <td colspan="2"> No Contacts Available</td>
-        </tr>
-        <tr th:each="contact : ${contacts}">
+        <tr th:each="contact : ${contactPage.content}">
             <td><span th:text="${contact.name}"> Name </span></td>
             <td><img th:src="${contact.imageUrl}"/></td>
         </tr>
         </tbody>
     </table>
+    <ul style="padding-left:0px">
+        <li style="display:inline"
+            th:if="${contactPage.totalPages > 0}" class="pagination"
+            th:each="pageNumber : ${pageNumbers}">
+            <a th:href="@{/api/contacts(size=${contactPage.size}, page=${pageNumber})}"
+               th:text=${pageNumber}
+               th:class="${pageNumber==contactPage.number + 1} ? active"
+               th:style="${pageNumber==contactPage.number + 1} ? 'font-weight: bold; color: black; text-decoration: none' : 'color: black'"></a>
+        </li>
+    </ul>
 </div>
 </body>
 
