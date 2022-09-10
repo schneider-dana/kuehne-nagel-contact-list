@@ -1,18 +1,32 @@
 package com.kuehne.nagel.test.contactlist.resource;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import com.kuehne.nagel.test.contactlist.model.Person;
+import com.kuehne.nagel.test.contactlist.repository.PersonRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/contacts")
 public class ContactController {
-    @Value("${spring.application.name}")
-    String appName;
 
-    @GetMapping("/")
-    public String homePage(final Model model) {
-        model.addAttribute("appName", appName);
-        return "home";
+    @Autowired
+    private PersonRepository personRepository;
+
+    @GetMapping
+    public Iterable<Person> findAll() {
+        personRepository.findAll().forEach(person -> System.out.println(person));
+        return personRepository.findAll();
     }
+
+    @GetMapping("/name/{name}")
+    public List<Person> findByName(@PathVariable String name) {
+        return personRepository.findByName(name);
+    }
+
 }

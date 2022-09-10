@@ -76,6 +76,7 @@
 
     <modules>
         <module>contact-list-application</module>
+        <module>contact-list-repository</module>
     </modules>
 
 </project>
