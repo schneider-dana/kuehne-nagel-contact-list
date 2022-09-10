@@ -10,4 +10,7 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 
     List<Person> findByName(final String name);
 
+    @Override
+    List<Person> findAll();
+
 }

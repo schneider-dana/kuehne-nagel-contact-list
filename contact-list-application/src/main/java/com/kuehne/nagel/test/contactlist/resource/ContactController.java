@@ -1,5 +1,6 @@
 package com.kuehne.nagel.test.contactlist.resource;
 
+import com.kuehne.nagel.test.contactlist.domain.PersonDTO;
 import com.kuehne.nagel.test.contactlist.model.Person;
 import com.kuehne.nagel.test.contactlist.repository.PersonRepository;
 
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @RestController
 @RequestMapping("/api/contacts")
 public class ContactController {
@@ -19,14 +22,19 @@ public class ContactController {
     private PersonRepository personRepository;
 
     @GetMapping
-    public Iterable<Person> findAll() {
-        personRepository.findAll().forEach(person -> System.out.println(person));
-        return personRepository.findAll();
+    public Iterable<PersonDTO> findAll() {
+//        personRepository.findAll().forEach(person -> System.out.println(person));
+
+        return personRepository.findAll().stream().map(ContactController::toDTO).collect(toList());
     }
 
     @GetMapping("/name/{name}")
-    public List<Person> findByName(@PathVariable String name) {
-        return personRepository.findByName(name);
+    public List<PersonDTO> findByName(@PathVariable final String name) {
+        return personRepository.findByName(name).stream().map(ContactController::toDTO).collect(toList());
+    }
+
+    private static PersonDTO toDTO(final Person person) {
+        return new PersonDTO(person.getName(), person.getUrl());
     }
 
 }
