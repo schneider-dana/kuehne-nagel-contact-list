@@ -21,4 +21,4 @@ mvn spring-boot:run
 ```
 
 ## Using application
-Open [localhost:56567](https://localhost:56567) on your browser. 
+Open `localhost:56567` on your browser. 
