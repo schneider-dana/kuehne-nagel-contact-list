@@ -2,12 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
+    <title>Home</title>
 </head>
-
 <body>
-<h1>Hello!</h1>
-<p>Welcome to <span th:text="${appName}">Our App</span></p>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <a href="/api/contacts">
+                <button>All Contacts</button>
+            </a>
+        </td>
+        <td>
+            <a href="/api/contacts/name">
+                <button>Search Contacts</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
-
 </html>

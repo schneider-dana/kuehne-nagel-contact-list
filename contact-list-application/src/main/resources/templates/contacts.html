@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts</title>
+</head>
+
+<body>
+<div>
+    <a href="/">
+        <button>Home</button>
+    </a>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${contacts.empty}">
+            <td colspan="2"> No Contacts Available</td>
+        </tr>
+        <tr th:each="contact : ${contacts}">
+            <td><span th:text="${contact.name}"> Name </span></td>
+            <td><img th:src="${contact.imageUrl}"/></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
